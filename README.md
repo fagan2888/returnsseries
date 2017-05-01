@@ -75,7 +75,8 @@ To examine the data, start with the *plot_perf* method.
 ```
 spx.plot_perf(log2=False)
 ```
-[plot0](logo/plot0.png)
+![plot0](logo/plot0.png "spx.plot_perf(log2=False)")
+
 *plot_perf* converts the returns to an account curve (a compounding price-index of the returns) and displays it along with summary statistics. As you can see from this long-term plot of the S&P500, the compounding of returns makes it hard to read a linear plot of the compounding returns. 
 
 If you set *log2=True* the plot will show a base-2 logarithm of the account curve. The tick labels on the y-axis are relabelled to show that the actual account curve is doubling with every unit increase. 
