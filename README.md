@@ -83,6 +83,7 @@ If you set *log2=True* the plot will show a base-2 logarithm of the account curv
 ```
 spx.plot_perf(log2=True)
 ```
+![plot1](logo/plot1.png "spx.plot_perf(log2=True)")
 
 On plots we often want to focus on certain time periods, so it should be easy to highlight them. To show how easily this can be done, let's highlight how the S&P500 did while Steve Jobs was CEO of Apple Computer. 
 ```
@@ -91,6 +92,7 @@ steve_jobs_is_ceo = [(dt.datetime(1976, 4, 1), dt.datetime(1985, 9, 16)),
                      (dt.datetime(1997, 9, 16), dt.datetime(2011, 8,24)),]
 spx.plot_perf(log2=True, shade_dates=steve_jobs_is_ceo)
 ```
+![plot2](logo/plot2.png "spx.plot_perf(log2=True, shade_dates=steve_jobs_is_ceo)")
 
 Putting highlights on plots is cool, but we also want it to be informative. Like any smart investor you are probably thinking about your risk and what happens to your investments in a bear market. 
 
@@ -100,7 +102,6 @@ spx_bear_dates = spx.bear_periods(limit=-.20)
 print spx_bear_dates
 spx.plot_perf(log2=True, shade_dates=spx_bear_dates)
 ```
-The *bear_periods* method will return the start and end dates of any peak-to-trough drawdown that exceeds the *limit* arg. These start and end dates can then be passed into the *shade_dates* arg of the *plot_perf*. 
 ```
 (Timestamp('1962-01-31 00:00:00'), Timestamp('1962-06-30 00:00:00', freq='M'))
 (Timestamp('1968-12-31 00:00:00'), Timestamp('1970-06-30 00:00:00', freq='M'))
@@ -110,6 +111,9 @@ The *bear_periods* method will return the start and end dates of any peak-to-tro
 (Timestamp('2000-09-30 00:00:00'), Timestamp('2002-09-30 00:00:00', freq='M'))
 (Timestamp('2007-11-30 00:00:00'), Timestamp('2009-02-28 00:00:00', freq='M'))
 ```
+![plot3](logo/plot3.png "spx.plot_perf(log2=True, shade_dates=spx_bear_dates)")
+
+The *bear_periods* method will return the start and end dates of any peak-to-trough drawdown that exceeds the *limit* arg. These start and end dates can then be passed into the *shade_dates* arg of the *plot_perf*. 
 
 Using the standard definition that a bear market is a peak-to-trough fall of 20% or more we can see that the S&P500 had bear markets starting in 1962, 1968, 1973, 1980, 1987, 2000 and 2007.
 
@@ -119,6 +123,8 @@ import returnsseries.plot as rp
 spx = spx[ixr.index.min():]
 rp.plot_perf([spx, ixr], log2=True, shade_dates=spx_bear_dates)
 ```
+![plot4](logo/plot4.png "rp.plot_perf([spx, ixr], log2=True, shade_dates=spx_bear_dates)")
+
 Because IXR only starts in 1998 we will cut down our SPX data so we only look at them over their overlapping time periods. Here we can see that when the S&P500 was in a bear market the Consumer Staples sector was also down, although it appears that it fell by less. 
 
 Interestingly, over their entire overlapping sample periods IXR and and SPX had almost exactly the same return statistics, both at 4.3% average annual return. 
