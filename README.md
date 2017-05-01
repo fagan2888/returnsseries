@@ -37,7 +37,6 @@ To answer this question we will use some data preloaded in *returnsseries* and u
 ```
 import returnsseries.data as rd
 rd.spx.tail()
-rd.ixr.plot()
 ```
 
 ```
@@ -50,24 +49,23 @@ Date
 Freq: M, Name: SPX, dtype: float64
 ```
 
-SPX is the S&P500 Index. IXR is the Consumer Staples sub-sector of the S&P500 Index; this contains companies such as CVS Health and Colgate-Palmolive. 
+SPX is the S&P500 Index. IXR is the Consumer Staples sub-sector of the S&P500 Index; this contains companies like CVS Health and Colgate-Palmolive. 
 
 *rd.spx* is a *pandas.Series* of monthly returns for SPX from Yahoo Finance. *rd.ixr* is a *pandas.Series* of daily returns for IXR from Yahoo Finance. 
 
 The *ReturnsSeries* class handles time-sample conversions, so our analysis can mix data of different frequencies.
 
-We first need to convert our *pandas.Series* objects into *ReturnsSeries*
+We first need to convert our *pandas.Series* objects into *ReturnsSeries*.
 ```
 import returnsseries as rs
 spx = rs.ReturnsSeries(series=rd.spx, periods_per_year=12)
 ```
-To instantiate a *ReturnsSeries* you need to provide a *pandas.Series* of your return data, and a value for periods_per_year which indicates the frequency of the returns. Because *rd.spx* has monthly returns, we set periods_per_year=12.
+To instantiate a *ReturnsSeries* you need to provide a *pandas.Series* of your return data, and a value for *periods_per_year* which indicates the frequency of the returns. Because *rd.spx* has monthly returns, we set *periods_per_year=12*.
 
 In *returnsseries.utils* the function *annual_median* can estimate the number of periods per year from a *pandas.Series* which automates this argument for you. 
 ```
 import returnsseries.utils as ru
 periods_per_year = ru.annual_median(rd.ixr)
-print periods_per_year
 ixr = rs.ReturnsSeries(rd.ixr, periods_per_year)
 ```
 
@@ -77,7 +75,7 @@ spx.plot_perf(log2=False)
 ```
 ![plot0](logo/plot0.png "spx.plot_perf(log2=False)")
 
-*plot_perf* converts the returns to an account curve (a compounding price-index of the returns) and displays it along with summary statistics. As you can see from this long-term plot of the S&P500, the compounding of returns makes it hard to read a linear plot of the compounding returns. 
+*plot_perf* converts the returns to an account curve (a compounding price-index of the returns) and displays it along with summary statistics. As you can see from this long-term plot of the S&P500, the compounding of returns makes it hard to read a linear plot of compounding returns. 
 
 If you set *log2=True* the plot will show a base-2 logarithm of the account curve. The tick labels on the y-axis are relabelled to show that the actual account curve is doubling with every unit increase. 
 ```
@@ -89,12 +87,12 @@ On plots we often want to focus on certain time periods, so it should be easy to
 ```
 import datetime as dt
 steve_jobs_is_ceo = [(dt.datetime(1976, 4, 1), dt.datetime(1985, 9, 16)),
-                     (dt.datetime(1997, 9, 16), dt.datetime(2011, 8,24)),]
+                     (dt.datetime(1997, 9, 16), dt.datetime(2011, 8, 24)),]
 spx.plot_perf(log2=True, shade_dates=steve_jobs_is_ceo)
 ```
 ![plot2](logo/plot2.png "spx.plot_perf(log2=True, shade_dates=steve_jobs_is_ceo)")
 
-Putting highlights on plots is cool, but we also want it to be informative. Like any smart investor you are probably thinking about your risk and what happens to your investments in a bear market. 
+Putting highlights on plots is cool, but we want them to be informative. Like any smart investor you are probably thinking about your risk, and what happens to your investments in a bear market.
 
 The *ReturnsSeries* makes it easy to examine bear markets. 
 ```
@@ -115,7 +113,7 @@ spx.plot_perf(log2=True, shade_dates=spx_bear_dates)
 
 The *bear_periods* method will return the start and end dates of any peak-to-trough drawdown that exceeds the *limit* arg. These start and end dates can then be passed into the *shade_dates* arg of the *plot_perf*. 
 
-Using the standard definition that a bear market is a peak-to-trough fall of 20% or more we can see that the S&P500 had bear markets starting in 1962, 1968, 1973, 1980, 1987, 2000 and 2007.
+Using the standard definition that a bear market is a peak-to-trough fall of 20% or more, we can see that the S&P500 had bear markets starting in 1962, 1968, 1973, 1980, 1987, 2000 and 2007.
 
 We can also use these same dates to highlight performance across other assets. On *returnsseries.plot* the function *plot_perf* has the same features but can plot a list of *ReturnsSeries* objects. 
 ```
@@ -129,7 +127,7 @@ Because IXR only starts in 1998 we will cut down our SPX data so we only look at
 
 Interestingly, over their entire overlapping sample periods IXR and and SPX had almost exactly the same return statistics, both at 4.3% average annual return. 
 
-Looking at the plots is somewhat helpful, we generally see what is happeing. But for a sophisticated investor like you, I'm sure you need want hard numbers. What did this defensive sector actually return in a bear market?
+Looking at the plots is helpful, we can generally see what is happeing. But for a sophisticated investor like you, you want hard numbers. What did this defensive sector actually return in a bear market?
 
 ```
 import pandas as pd
@@ -142,7 +140,7 @@ pd.concat(ixr_bear_summaries, axis=1)
 ```
 Using the *period_returns* and *period_returns_summaries* methods we can create and summarise *ReturnsSeries* objects for any subperiod of our data. Using the *spx_bear_dates* we can see the total returns for both SPX and IXR during in the periods when the S&P 500 was in a bear market. 
 
-It seems that while SPX lost -46% and -52% in the bear markets of 2000 and 2007, IXR lost -20% and -29%. So it seems Consumer Staples was at least somewhat defensive over those time periods, although not miraculously defensive: it did outperform the overall index but still suffered significant losses. 
+It seems that while SPX lost -46% and -52% in the bear markets of 2000 and 2007, IXR lost -20% and -29%. So it seems that over these time periods, Consumer Staples somewhat defensive, but not miraculously defensive: it outperformed the overall index, but still suffered significant losses. 
 ```
                          2000-09-30  2007-11-30
 Cumulative Return (%)         -46.3       -52.6
