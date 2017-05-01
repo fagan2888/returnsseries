@@ -1,6 +1,5 @@
 *.pyc
 *\*.pyc
-build\
-build\*
-dist\*
-returnsseries.egg-info\*
+build/
+dist/
+returnsseries.egg-info/
