@@ -1,16 +1,16 @@
-# [![Brooksbridge](logo/brooksbridge_logo.jpg)](https://github.com/smithto1/returnsseries.git) [returnsseries](https://github.com/smithto1/returnsseries.git)
+# [![Brooksbridge](logo/brooksbridge_logo.jpg)](https://github.com/BrooksbridgeCapitalLLP/returnsseries.git) [returnsseries](https://github.com/BrooksbridgeCapitalLLP/returnsseries.git)
 
 *returnsseries* defines the ReturnSeries object, a new subclass of the pandas.Series that is designed specifically for handling financial returns which brings powerful plotting and analysis capabilities. 
 
 ## Install *returnsseries*
 ### pip install
 ```
-pip install git+https://github.com/smithto1/returnsseries.git
+pip install git+https://github.com/BrooksbridgeCapitalLLP/returnsseries.git
 ```
 ### Install from source
 Clone the repository from GitHub
 ```
-git clone https://github.com/smithto1/returnsseries.git
+git clone https://github.com/BrooksbridgeCapitalLLP/returnsseries.git
 ```
 Then in the parent directory of *returnsseries* run
 ```
