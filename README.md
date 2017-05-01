@@ -31,7 +31,7 @@ python setup.py install
 ## License
 
 ## Example
-Here is the financial question that we want to answer: does the Consumer Staples Sector really a defensive sector? How well does it perform when the overall stock market is falling?
+Here is the financial question that we want to answer: is the Consumer Staples Sector really a defensive sector? How well does it perform when the overall stock market is falling?
 
 To answer this question we will use some data preloaded in *returnsseries* and use the *ReturnsSeries* object to conduct our analysis.
 ```
@@ -65,7 +65,13 @@ To examine the data, start with the *plot_perf* method.
 spx.plot_perf(log2=False)
 ```
 *plot_perf* converts the returns to an account curve (a compounding price-index of the returns) and displays it along with summary statistics. As you can see from this long-term plot of the S&P500, the compounding of returns makes it hard to read a linear plot of the compounding returns. 
+
 If you set *log2=True* the plot will show a base-2 logarithm of the account curve. The tick labels on the y-axis are relabelled to show that the actual account curve is doubling with every unit increase. 
 ```
 spx.plot_perf(log2=True)
+```
+
+```
+import datetime as dt
+obama_years = [(dt.datetime(2009, 1, 20), dt.datetime(2017, 1, 19))]
 ```
