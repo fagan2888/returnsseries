@@ -39,6 +39,17 @@ import returnsseries.data as rd
 rd.spx.tail()
 rd.ixr.plot()
 ```
+
+```
+Date
+2016-12-31    0.018201
+2017-01-31    0.017884
+2017-02-28    0.037198
+2017-03-31   -0.000389
+2017-04-30    0.009091
+Freq: M, Name: SPX, dtype: float64
+```
+
 SPX is the S&P500 Index. IXR is the Consumer Staples sub-sector of the S&P500 Index; this contains companies such as CVS Health and Colgate-Palmolive. 
 
 *rd.spx* is a *pandas.Series* of monthly returns for SPX from Yahoo Finance. *rd.ixr* is a *pandas.Series* of daily returns for IXR from Yahoo Finance. 
@@ -64,6 +75,7 @@ To examine the data, start with the *plot_perf* method.
 ```
 spx.plot_perf(log2=False)
 ```
+[plot0](logo/plot0.png)
 *plot_perf* converts the returns to an account curve (a compounding price-index of the returns) and displays it along with summary statistics. As you can see from this long-term plot of the S&P500, the compounding of returns makes it hard to read a linear plot of the compounding returns. 
 
 If you set *log2=True* the plot will show a base-2 logarithm of the account curve. The tick labels on the y-axis are relabelled to show that the actual account curve is doubling with every unit increase. 
@@ -89,7 +101,13 @@ spx.plot_perf(log2=True, shade_dates=spx_bear_dates)
 ```
 The *bear_periods* method will return the start and end dates of any peak-to-trough drawdown that exceeds the *limit* arg. These start and end dates can then be passed into the *shade_dates* arg of the *plot_perf*. 
 ```
-[(Timestamp('1962-01-31 00:00:00'), Timestamp('1962-06-30 00:00:00', freq='M')), (Timestamp('1968-12-31 00:00:00'), Timestamp('1970-06-30 00:00:00', freq='M')), (Timestamp('1973-01-31 00:00:00'), Timestamp('1974-09-30 00:00:00', freq='M')), (Timestamp('1980-12-31 00:00:00'), Timestamp('1982-07-31 00:00:00', freq='M')), (Timestamp('1987-09-30 00:00:00'), Timestamp('1987-11-30 00:00:00', freq='M')), (Timestamp('2000-09-30 00:00:00'), Timestamp('2002-09-30 00:00:00', freq='M')), (Timestamp('2007-11-30 00:00:00'), Timestamp('2009-02-28 00:00:00', freq='M'))]
+(Timestamp('1962-01-31 00:00:00'), Timestamp('1962-06-30 00:00:00', freq='M'))
+(Timestamp('1968-12-31 00:00:00'), Timestamp('1970-06-30 00:00:00', freq='M'))
+(Timestamp('1973-01-31 00:00:00'), Timestamp('1974-09-30 00:00:00', freq='M'))
+(Timestamp('1980-12-31 00:00:00'), Timestamp('1982-07-31 00:00:00', freq='M'))
+(Timestamp('1987-09-30 00:00:00'), Timestamp('1987-11-30 00:00:00', freq='M'))
+(Timestamp('2000-09-30 00:00:00'), Timestamp('2002-09-30 00:00:00', freq='M'))
+(Timestamp('2007-11-30 00:00:00'), Timestamp('2009-02-28 00:00:00', freq='M'))
 ```
 
 Using the standard definition that a bear market is a peak-to-trough fall of 20% or more we can see that the S&P500 had bear markets starting in 1962, 1968, 1973, 1980, 1987, 2000 and 2007.
@@ -163,7 +181,7 @@ For this we use the *periods_combined_summary* method. This method returns 3 sum
 2. A summary of the data that lies **inside** the subperiods defined by the *perods* arg
 3. A summary of the data that lies **outside** the subperiods defined by the *periods* arg
 
-Since the subperiods defined by *spx_bear_dates* are the SPX bear markets, I rename the columns * ['All Data', 'SPX Bear Prds', 'SPX Bull Prds']*.
+Since the subperiods defined by *spx_bear_dates* are the SPX bear markets, I rename the columns *['All Data', 'SPX Bear Prds', 'SPX Bull Prds']*.
 
 ```
                        All Data  SPX Bear Prds  SPX Bull Prds
@@ -181,12 +199,8 @@ Annual Volatility (%)     15.20          21.40          13.50
 Sharpe Ratio               0.28          -0.77           0.69
 Track Record (Yrs)        18.50           3.20          15.30
 ```
+This allows us to see how each index perfomed in different market environments. Looking down the first column, which summarises all of the data, we can see that SPX and IXR had very similar performance overall. Cumulative Return, Volatility and Sharpe Ratio are all near identical. 
 
+However, if we look across the rows they do look different. The SPX performed quite differently across Bear and Bull periods, with respective Sharpe Ratios of -1.81 and 1.27. The IXR is much more balanced across environments, with Bear and Bull Sharpe Ratios of -0.77 and 0.69. 
 
-
-
-
-
-
-
-
+This analysis suggest that the Consumer Staples sector has been an effective, but not miraculous, defensive investment for the last 20 years. When the overall market index was in its worst bear markets, Consumer Staples also declined but declined a lot less. 
