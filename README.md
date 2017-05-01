@@ -29,7 +29,7 @@ python setup.py install
 * [**Thomas Smith**](https://www.linkedin.com/in/thomassmithcfa/)
 
 ## License
-*returnsseries* is licensed under the GNU General Public License v3. A copy of which is included in LICENSE
+The copyright of *returnsseries* is held by Brooksbridge Capital LLP. *returnsseries* is licensed under the GNU General Public License v3. A copy of which is included in LICENSE
 
 ## Example
 Here is the financial question that we want to answer: is the Consumer Staples Sector really a defensive sector? How well does it perform when the overall stock market is falling?
