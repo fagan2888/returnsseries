@@ -27,6 +27,7 @@ setup(name='returnsseries',
       url='XXXX',
       
       packages=['returnsseries',],
+      package_data={'returnsseries':['data/*']},
       install_requires=['numpy',
                         'pandas', 
                         'matplotlib',
