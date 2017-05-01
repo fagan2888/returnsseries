@@ -7,7 +7,7 @@ import returnsseries.utils as ru
 import returnsseries.displayfunctions as rd
 
 def plot_perf(returns_list, log2, shade_dates=None, shade_color='lightblue', 
-              yticks_round=1, correl_series=0, legend_loc='lower right', 
+              yticks_round=1, legend_loc='lower right', 
               summary_funcs=rd.summaries['ts'], **kwargs):
     """Plot a list of ReturnsSeries with relevant summary stats
 
@@ -28,9 +28,6 @@ def plot_perf(returns_list, log2, shade_dates=None, shade_color='lightblue',
         valid matplotlib color name/string
     yticks_round: int, optional, default 1
         Number of decimals the y-axis tick lables should be rounded to
-    correl_series: int, optional, default 0
-        Specifies which entry in returns_list to calculate the 
-        correlation with. must have 0 <= base_series < len(returns_list)
     legend_loc: str, optional, default 'lower right'
         Specifies where to place pyplot.legend, accepts any string that is 
         valid for pyplot.legend loc arg
@@ -52,8 +49,6 @@ def plot_perf(returns_list, log2, shade_dates=None, shade_color='lightblue',
     
     summary_df = pd.concat([rtns.summary(summary_funcs) \
                             for rtns in returns_list], axis=1)
-    correl = correl_calc(returns_list, correl_series)
-    summary_df = summary_df.append(correl)
     text_topleft(summary_df)
     
     if legend_loc is not None:
