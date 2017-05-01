@@ -23,7 +23,7 @@ setup(name='returnsseries',
       author='Brooksbridge Capital LLP',
       author_email='thomas.smith@brooksbridge.com',
       license='GPL',
-      keywords=['financial', 'returns', 'pandas', 'series'],
+      keywords=['finance', 'returns', 'pandas', 'series'],
       url='XXXX',
       
       packages=['returnsseries',],
