@@ -8,7 +8,7 @@ _spx_file_ = os.path.join(_current_folder_, r'data/spx_sp_500_index.csv')
 
 spx = pd.read_csv(_spx_file_, header=0, index_col=0, parse_dates=[0], 
                   dayfirst=True)
-spx = spx.sort_index().loc[:,'Close'].resample('M').last()
+spx = spx.sort_index().loc[:,'Close'].resample('M', 'last')
 spx = spx.div( spx.shift(1) ) - 1
 spx.name = 'SPX'
 
