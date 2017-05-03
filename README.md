@@ -21,12 +21,12 @@ python setup.py install
 ### Python
 *returnsseries* is written for Python 2
 ### Package Dependencies
-* numpy
-* pandas
-* matplotlib
+* numpy >= 1.11.1
+* pandas >= 0.16.2
+* matplotlib >= 1.11.1
 
 ## Authors
-* [**Thomas Smith**](https://www.linkedin.com/in/thomassmithcfa/)
+* [**Thomas Smith**](https://www.linkedin.com/in/thomassmithcfa/)      [GitHub](https://github.com/smithto1)
 
 ## License
 The copyright of *returnsseries* is held by Brooksbridge Capital LLP. *returnsseries* is licensed under the GNU General Public License v3. A copy of which is included in LICENSE
@@ -37,7 +37,7 @@ Here is the financial question that we want to answer: is the Consumer Staples S
 To answer this question we will use some data preloaded in *returnsseries* and use the *ReturnsSeries* object to conduct our analysis.
 ```
 import returnsseries.data as rd
-rd.spx.tail()
+print rd.spx.tail()
 ```
 
 ```
