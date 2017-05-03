@@ -26,7 +26,7 @@ python setup.py install
 * matplotlib >= 1.11.1
 
 ## Authors
-* [**Thomas Smith**](https://www.linkedin.com/in/thomassmithcfa/)      [GitHub](https://github.com/smithto1)
+* *Brooksbridge Capital LLP*
 
 ## License
 The copyright of *returnsseries* is held by Brooksbridge Capital LLP. *returnsseries* is licensed under the GNU General Public License v3. A copy of which is included in LICENSE
