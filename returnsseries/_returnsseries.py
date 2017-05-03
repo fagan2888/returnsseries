@@ -1,6 +1,7 @@
 """Subclass of pandas.Series designed specifically for financial returns."""
 import numpy as np
 import pandas as pd
+import warnings as wa
 import datetime as dt
 import pandas.stats.moments as mo
 import matplotlib.pyplot as plt 
@@ -416,7 +417,9 @@ class ReturnsSeries(pd.core.series.Series):
             freq arg, values will be the appropriate compounded returns for 
             those periods. """
         acct_curve = self.account_curve()
-        acct_curve = acct_curve.resample(freq, how='last')
+        with wa.catch_warnings():
+            wa.simplefilter('ignore')
+            acct_curve = acct_curve.resample(freq, 'last')
         
         start_date = acct_curve.index.min() - dt.timedelta(days=1)
         start_val = pd.Series(1, [start_date], name=self.name)

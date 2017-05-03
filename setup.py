@@ -24,7 +24,7 @@ setup(name='returnsseries',
       author_email='thomas.smith@brooksbridge.com',
       license='GPL',
       keywords=['finance', 'returns', 'pandas', 'series'],
-      url='XXXX',
+      url='https://github.com/BrooksbridgeCapitalLLP/returnsseries.git',
       
       packages=['returnsseries',],
       package_data={'returnsseries':['data/*']},

@@ -1,6 +1,7 @@
 """Utility funcs that underlie methods for ReturnsSeries class"""
 import numpy as np
 import pandas as pd
+import warnings as wa
 
 def annual_median(srs):
     """Estimate the periods_per_year/freqency of a pandas.Series
@@ -24,7 +25,10 @@ def annual_median(srs):
         median number of non-NaN values across each year that has data, 
         discluding the first and last calendar years as they are likely to be 
         partial years. """
-    rtn = srs.resample('A').count()
+    with wa.catch_warnings():
+        wa.simplefilter('ignore')
+        rtn = srs.resample('A', 'count')
+    
     rtn = rtn.replace(0, np.nan).dropna()
     rtn = rtn[1:-1].median()
     return rtn
@@ -156,9 +160,13 @@ def drawdowns(account_curve):
     -------
     pandas.Series
         index is the same as account_curve arg, values are percentage decline
-        from the account_curve's previous peak."""    
-    rolling_max = account_curve.rolling(min_periods=1, 
-                                     window=account_curve.shape[0]).max()
+        from the account_curve's previous peak.""" 
+    with wa.catch_warnings():
+        wa.simplefilter('ignore')
+        rolling_max = pd.rolling_max(account_curve, 
+                                     window=account_curve.shape[0], 
+                                     min_periods=1)
+    
     drawdowns_ts = account_curve/rolling_max - 1
     drawdowns_ts.name = account_curve.name
     
